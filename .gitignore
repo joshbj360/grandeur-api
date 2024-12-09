@@ -133,3 +133,6 @@ dmypy.json
 
 # Secrets
 secrets.json
+
+#workspace
+.code-workspace
