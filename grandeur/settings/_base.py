@@ -12,7 +12,7 @@ from django.core.exceptions import ImproperlyConfigured
 from grandeur.apps.core.versioning import get_git_changeset_timestamp
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 EXTERNAL_BASE = os.path.join(BASE_DIR, "externals")
 EXTERNAL_LIBS_PATH = os.path.join(EXTERNAL_BASE, "libs")
@@ -55,9 +55,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # third-party
-    # ...
+    'django',
+    'rest_framework',
     # local
-    # ...
+    'grandeur.apps.GUser',
+    'grandeur.apps.SellerProfile',
+    'grandeur.apps.Product',
 ]
 
 MIDDLEWARE = [
@@ -101,8 +104,6 @@ DATABASES = {
         'NAME': get_secret('DATABASE_NAME'),
         'USER': get_secret('DATABASE_USER'),
         'PASSWORD': get_secret('DATABASE_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5432',
     }}
 
 
@@ -146,7 +147,7 @@ LOCALE_PATHS = [
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'grandeur', 'site_static'),
+    os.path.join(BASE_DIR, '', 'site_static'),
 ]
 
 timestamp = get_git_changeset_timestamp(BASE_DIR)
@@ -160,3 +161,6 @@ EMAIL_HOST = get_secret("EMAIL_HOST")
 EMAIL_PORT = get_secret("EMAIL_PORT")
 EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
+
+
+AUTH_USER_MODEL= 'GUser.GUser'

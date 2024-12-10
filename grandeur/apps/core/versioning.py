@@ -15,7 +15,7 @@ def get_git_changeset_timestamp(absolute_path):
 
     timestamp = git_log.communicate()[0]
     try:
-        timestamp = datetime.utcfromtimestamp(int(timestamp))
+        timestamp = datetime.fromtimestamp(int(timestamp))
     except ValueError:
         # Fallback to current timestamp
         return datetime.now().strftime('%Y%m%d%H%M%S')

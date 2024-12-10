@@ -135,4 +135,4 @@ dmypy.json
 secrets.json
 
 #workspace
-.code-workspace
+grandeur-api.code-workspace
