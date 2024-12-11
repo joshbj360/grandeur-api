@@ -11,6 +11,8 @@ import sys
 from django.core.exceptions import ImproperlyConfigured
 from grandeur.apps.core.versioning import get_git_changeset_timestamp
 
+from datetime import timedelta
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -57,6 +59,7 @@ INSTALLED_APPS = [
     # third-party
     'django',
     'rest_framework',
+    'rest_framework_simplejwt',
     # local
     'grandeur.apps.GUser',
     'grandeur.apps.SellerProfile',
@@ -164,3 +167,21 @@ EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
 
 
 AUTH_USER_MODEL= 'GUser.GUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,  # Use your Django SECRET_KEY
+}
