@@ -132,7 +132,7 @@ dmypy.json
 !/static/.gitkeep
 
 # Secrets
-secrets.json
+# secrets.json
 
 #workspace
 grandeur-api.code-workspace
